@@ -2,12 +2,17 @@ import streamlit as st
 import requests
 
 def fetch_books(query):
-    API_KEY = "AIzaSyCuJyV-tEQnDEDWPL5pm9c7Twz8khbSfk4"  # Replace with your actual API key
+    API_KEY = st.secrets["API_KEY"]  # Get API key from secrets
     url = f"https://www.googleapis.com/books/v1/volumes?q={query}&key={API_KEY}"
     response = requests.get(url)
+    
+    st.write("API Response:", response.status_code)  # Debugging line
+    st.json(response.json())  # Show full API response
+    
     if response.status_code == 200:
         return response.json().get("items", [])
     return []
+
 
 def display_books(books):
     for book in books:
