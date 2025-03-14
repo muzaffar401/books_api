@@ -3,7 +3,7 @@ import requests
 
 def fetch_books(query):
     API_KEY = st.secrets["API_KEY"]  # Get API key from secrets
-    url = f"https://www.googleapis.com/books/v1/volumes?q={query}&key={API_KEY}"
+    url = f"https://www.googleapis.com/books/v1/volumes?q={query}"
     response = requests.get(url)
     
     st.write("API Response:", response.status_code)  # Debugging line
